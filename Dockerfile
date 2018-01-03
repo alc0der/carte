@@ -43,7 +43,6 @@ RUN /usr/bin/wget \
 
 # # install Pentaho Plugins & Libraries
 # # TO Download From the Internet: 
-# # TO Download From the ROAMWORKS Network: ftp://dev:dev123@192.168.168.3/Install Files/Pentaho/sqljdbc42.jar
 RUN /usr/bin/wget \
     --progress=dot:giga \
     'https://download.microsoft.com/download/0/2/A/02AAE597-3865-456C-AE7F-613F99F850A8/enu/sqljdbc_6.0.8112.100_enu.tar.gz' \
