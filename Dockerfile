@@ -34,28 +34,24 @@ COPY carte-*.config.xml $PENTAHO_HOME/templates/
 COPY docker-entrypoint.sh $PENTAHO_HOME/scripts/
 
 # Download PDI
-# RUN /usr/bin/wget \
-#     --progress=dot:giga \
-#     'http://downloads.sourceforge.net/project/pentaho/Data%20Integration/7.0/pdi-ce-7.0.0.0-25.zip' \ 
-#     -O /tmp/pdi-ce-7.0.0.0-25.zip && \
-#     /usr/bin/unzip -q /tmp/pdi-ce-7.0.0.0-25.zip -d  $PENTAHO_HOME && \
-#     rm /tmp/pdi-ce-7.0.0.0-25.zip
-COPY ./.installables/pdi-ce-${PDI_VERSION}.zip /tmp/pdi-ce-${PDI_VERSION}.zip
-RUN /usr/bin/unzip -q /tmp/pdi-ce-${PDI_VERSION}.zip -d $PENTAHO_HOME && \
-    rm /tmp/pdi-ce-${PDI_VERSION}.zip
+RUN /usr/bin/wget \
+    --progress=dot:giga \
+    'http://downloads.sourceforge.net/project/pentaho/Data%20Integration/7.0/pdi-ce-7.0.0.0-25.zip' \ 
+    -O /tmp/pdi-ce-7.0.0.0-25.zip && \
+    /usr/bin/unzip -q /tmp/pdi-ce-7.0.0.0-25.zip -d  $PENTAHO_HOME && \
+    rm /tmp/pdi-ce-7.0.0.0-25.zip
 
 # # install Pentaho Plugins & Libraries
 # # TO Download From the Internet: 
 # # TO Download From the ROAMWORKS Network: ftp://dev:dev123@192.168.168.3/Install Files/Pentaho/sqljdbc42.jar
-#ADD ["ftp://dev:dev123@192.168.168.3/Install Files/Pentaho/sqljdbc42.jar", "./data-integration/lib/"]
-# RUN /usr/bin/wget \
-#     --progress=dot:giga \
-#     'https://download.microsoft.com/download/0/2/A/02AAE597-3865-456C-AE7F-613F99F850A8/enu/sqljdbc_6.0.8112.100_enu.tar.gz' \
-#     -O /tmp/sqljdbc_6.0.8112.100_enu.tar.gz && \
-#     tar -xvzf /tmp/sqljdbc_6.0.8112.100_enu.tar.gz -C /tmp sqljdbc_6.0/enu/jre8/sqljdbc42.jar && \
-#     mv /tmp/sqljdbc_6.0/enu/jre8/sqljdbc42.jar $PENTAHO_HOME/data-integration/lib/©
-COPY ./.installables/sqljdbc42.jar /tmp/sqljdbc42.jar
+RUN /usr/bin/wget \
+    --progress=dot:giga \
+    'https://download.microsoft.com/download/0/2/A/02AAE597-3865-456C-AE7F-613F99F850A8/enu/sqljdbc_6.0.8112.100_enu.tar.gz' \
+    -O /tmp/sqljdbc_6.0.8112.100_enu.tar.gz && \
+    tar -xvzf /tmp/sqljdbc_6.0.8112.100_enu.tar.gz -C /tmp sqljdbc_6.0/enu/jre8/sqljdbc42.jar && \
+    mv /tmp/sqljdbc_6.0/enu/jre8/sqljdbc42.jar $PENTAHO_HOME/data-integration/lib/©
 RUN mv /tmp/sqljdbc42.jar $PENTAHO_HOME/data-integration/lib/
+RUN rm /tmp/sqljdbc_6.0.8112.100_enu.tar.gz
 
 # Expose Carte Server
 EXPOSE ${CARTE_PORT}
