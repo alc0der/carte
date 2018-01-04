@@ -48,9 +48,7 @@ RUN /usr/bin/wget \
     'https://download.microsoft.com/download/0/2/A/02AAE597-3865-456C-AE7F-613F99F850A8/enu/sqljdbc_6.0.8112.100_enu.tar.gz' \
     -O /tmp/sqljdbc_6.0.8112.100_enu.tar.gz && \
     tar -xvzf /tmp/sqljdbc_6.0.8112.100_enu.tar.gz -C /tmp sqljdbc_6.0/enu/jre8/sqljdbc42.jar && \
-    mv /tmp/sqljdbc_6.0/enu/jre8/sqljdbc42.jar $PENTAHO_HOME/data-integration/lib/©
-RUN mv /tmp/sqljdbc42.jar $PENTAHO_HOME/data-integration/lib/
-RUN rm /tmp/sqljdbc_6.0.8112.100_enu.tar.gz
+    mv /tmp/sqljdbc_6.0/enu/jre8/sqljdbc42.jar $PENTAHO_HOME/data-integration/lib/
 
 # Expose Carte Server
 EXPOSE ${CARTE_PORT}
